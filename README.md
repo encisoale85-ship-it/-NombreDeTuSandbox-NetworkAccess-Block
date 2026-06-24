@@ -1,126 +1,136 @@
-# 📦 Sandbox Network Access Block - Archivo de Sandboxes
+# Sandbox Network Access Management
 
-Sistema centralizado para gestionar, documentar y controlar todos los sandboxes creados con reglas de acceso de red.
+Centralized repository for documenting, managing, and auditing sandbox environments with controlled network access policies.
 
-## 📋 Descripción
+## Overview
 
-Este repositorio actúa como un **archivo maestro** para:
-- ✅ Registrar todos los sandboxes creados
-- ✅ Modificar configuraciones de acceso de red
-- ✅ Eliminar sandboxes obsoletos
-- ✅ Mantener un historial de cambios
-- ✅ Automatizar la gestión de sandboxes
+This repository serves as a structured registry for sandbox instances used in testing, development, security validation, or controlled operational environments. Its purpose is to provide a consistent and auditable record of each sandbox, including its configuration, lifecycle status, and network access rules.
 
-## 📁 Estructura del Proyecto
+## Objectives
 
-```
+- Maintain a single source of truth for all sandbox environments
+- Standardize the documentation of each sandbox instance
+- Define and track network access policies clearly and consistently
+- Support creation, modification, and archival workflows
+- Improve traceability and operational governance through version control
+
+## Key Features
+
+- Standardized sandbox template for consistent documentation
+- Centralized configuration files for network policies and access rules
+- Scripts to create, list, update, and archive sandboxes
+- Version-controlled audit trail through Git history
+- Structured documentation for onboarding and maintenance
+
+## Repository Structure
+
+```text
 -NombreDeTuSandbox-NetworkAccess-Block/
-├── README.md                      # Este archivo
-├── CHANGELOG.md                   # Historial de cambios
-├── sandboxes/                     # Carpeta de sandboxes activos
-│   ├── sandbox-template.md        # Plantilla
-│   └── [sandbox-name].md          # Archivos de sandboxes
+├── README.md
+├── CHANGELOG.md
+├── sandboxes/
+│   ├── sandbox-template.md
+│   └── [sandbox-name].md
 ├── config/
-│   ├── network-access.json        # Reglas de acceso de red
-│   ├── block-rules.json           # Reglas de bloqueo
-│   └── settings.json              # Configuración general
+│   ├── network-access.json
+│   ├── block-rules.json
+│   └── settings.json
 ├── scripts/
-│   ├── create-sandbox.sh          # Script crear sandbox
-│   ├── modify-sandbox.sh          # Script modificar sandbox
-│   ├── delete-sandbox.sh           # Script eliminar sandbox
-│   └── list-sandboxes.sh          # Script listar sandboxes
-└── archive/                       # Sandboxes eliminados
-    └── [old-sandbox-name].md
+│   ├── create-sandbox.sh
+│   ├── list-sandboxes.sh
+│   ├── modify-sandbox.sh
+│   ├── delete-sandbox.sh
+│   └── setup.sh
+├── archive/
+└── docs/
+    ├── crear-sandbox.md
+    ├── reglas-red.md
+    ├── troubleshooting.md
+    └── quick-start.md
 ```
 
-## 🚀 Guía Rápida
+## Getting Started
 
-### Crear un Nuevo Sandbox
+1. Clone the repository.
+2. Run the initial setup:
 
 ```bash
-./scripts/create-sandbox.sh --name "mi-sandbox" --network "bloqueado"
+./scripts/setup.sh
 ```
 
-### Listar Todos los Sandboxes
+3. Create a sandbox:
+
+```bash
+./scripts/create-sandbox.sh --name "demo-sandbox" --network "bloqueado"
+```
+
+4. Review the current inventory:
 
 ```bash
 ./scripts/list-sandboxes.sh
 ```
 
-### Modificar un Sandbox
+## Sandbox Record Format
 
-```bash
-./scripts/modify-sandbox.sh --name "mi-sandbox" --network "permitido"
-```
+Each sandbox should be documented using the template available at:
 
-### Eliminar un Sandbox
+- `sandboxes/sandbox-template.md`
 
-```bash
-./scripts/delete-sandbox.sh --name "mi-sandbox"
-```
+A typical record includes:
+- Identification and ownership information
+- Creation and modification dates
+- Current state and lifecycle status
+- Network access policy
+- Allowed or blocked ports, domains, and IP ranges
+- Purpose and usage notes
+- Change history
 
-## 📝 Formato de Archivo Sandbox
+## Configuration Files
 
-Ver plantilla en: `sandboxes/sandbox-template.md`
+The repository includes configuration files to support consistent policy definitions:
 
-```markdown
-# Sandbox: [Nombre]
+- `config/network-access.json`: global network access configuration
+- `config/block-rules.json`: blocking and security rules
+- `config/settings.json`: repository-wide settings and governance parameters
 
-## Información General
-- **ID**: sandbox-XXX
-- **Fecha de creación**: YYYY-MM-DD
-- **Estado**: Activo | Inactivo | Archivado
-- **Última modificación**: YYYY-MM-DD
+## Automation Scripts
 
-## Configuración de Red
-- **Acceso de red**: Bloqueado | Permitido | Restringido
-- **Puertos permitidos**: [lista de puertos]
-- **Dominios bloqueados**: [lista de dominios]
-- **IPs permitidas**: [lista de IPs]
+The following scripts are available to simplify routine operations:
 
-## Descripción y Propósito
-[Descripción detallada del sandbox]
+- `scripts/create-sandbox.sh`: creates a new sandbox record
+- `scripts/list-sandboxes.sh`: lists active and archived sandboxes
+- `scripts/modify-sandbox.sh`: updates sandbox configuration
+- `scripts/delete-sandbox.sh`: archives or permanently deletes a sandbox
+- `scripts/setup.sh`: prepares the repository structure and permissions
 
-## Historial de Modificaciones
-- YYYY-MM-DD: [descripción del cambio]
-```
+## Governance and Security Recommendations
 
-## ⚙️ Configuración de Red
+To keep the repository useful and secure, it is recommended to:
 
-Ver: `config/network-access.json`
+- Apply the principle of least privilege for each sandbox
+- Maintain clear descriptions of the purpose of every sandbox
+- Review and archive inactive environments periodically
+- Keep changes traceable through Git commits
+- Preserve backups before significant configuration changes
 
-Define reglas globales y específicas para cada sandbox.
+## Documentation
 
-## 🔄 Historial de Cambios
+Additional technical and operational documentation is available in the `docs/` folder:
 
-Ver: `CHANGELOG.md`
+- `docs/crear-sandbox.md`
+- `docs/reglas-red.md`
+- `docs/troubleshooting.md`
+- `docs/quick-start.md`
 
-Registro de todas las operaciones realizadas en sandboxes.
+## Maintenance
 
-## 📊 Estadísticas
+This repository is intended to evolve as sandbox management requirements grow. Future improvements may include:
 
-- **Sandboxes Activos**: [Auto-actualizado]
-- **Sandboxes Inactivos**: [Auto-actualizado]
-- **Sandboxes Archivados**: [Auto-actualizado]
+- API-based management workflows
+- Web dashboard visualization
+- CI/CD integration
+- Automated reporting and alerts
 
-## 🛠️ Automatización
+## License
 
-Los scripts en `scripts/` permiten automatizar:
-- Creación masiva de sandboxes
-- Aplicar cambios globales
-- Generar reportes
-- Limpiar sandboxes antiguos
-
-## 📚 Documentación Adicional
-
-- [Guía de Creación de Sandboxes](docs/crear-sandbox.md)
-- [Reglas de Acceso de Red](docs/reglas-red.md)
-- [Resolución de Problemas](docs/troubleshooting.md)
-
-## 👤 Autor
-
-**encisoale85-ship-it**
-
-## 📄 Licencia
-
-MIT
+This project is distributed under the MIT License.
